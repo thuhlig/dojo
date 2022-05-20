@@ -2,46 +2,28 @@
 
 const print = array => array.forEach(line => console.log(line.join('')))
 
-const example = [
-  [' ', ' ', 'a', ' ', ' '],
-  [' ', 'b', ' ', 'b', ' '],
-  ['c', ' ', ' ', ' ', 'c'],
-  [' ', 'b', ' ', 'b', ' '],
-  [' ', ' ', 'a', ' ', ' ']
-]
-
-print(example)
-
-print(doSomeStuff("c"))
-
-function doSomeStuff(letter) {
-  const a = 97
-  const z = 122
+const shineBrightLikeADiamond = (letter) => {
+  const begin = "a".charCodeAt(0)
+  const end = letter.charCodeAt(0)
   const abc = []
 
-  for (let i = a; i <= z; i++)
+  for (let i = begin; i <= end; i++)
     abc.push(String.fromCharCode(i))
 
   const letterIndex = abc.indexOf(letter)
-  const size = letterIndex * 2 + 1
+  const size = abc.length * 2 - 1
 
   const lines = []
 
   for (let i = 0; i < size; i++) {
-    const rowLetterCode = i > letterIndex ? a + size - i - 1 : a + i
-    const rowLetter = String.fromCharCode(rowLetterCode)
-
+    const rowLetter = i > letterIndex ? abc[size - i - 1] : abc[i]
     const line = []
 
     for (let j = 0; j < size; j++) {
-      const a = (i + j) === letterIndex
-      const b = (size - 1 - i + j) === letterIndex
-      const c = (size - 1 - j + i) === letterIndex
-      const d = size - (size - j - size - i) === letterIndex
+      const grow = j === letterIndex - i || j === letterIndex + i
+      const shrink = j === i - letterIndex || i - letterIndex === size - 1 - j
 
-      const letterOrDot = (a || b || c || d) ? rowLetter : "."
-
-      line.push(letterOrDot)
+      line.push(grow || shrink ? rowLetter : " ")
     }
 
     lines.push(line)
@@ -49,3 +31,9 @@ function doSomeStuff(letter) {
 
   return lines
 }
+
+const a = 97
+const z = 122
+
+for (let i = a; i <= z; i++)
+  print(shineBrightLikeADiamond(String.fromCharCode(i)))
