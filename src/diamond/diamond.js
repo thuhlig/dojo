@@ -35,5 +35,7 @@ const shineBrightLikeADiamond = (letter) => {
 const a = 97
 const z = 122
 
-for (let i = a; i <= z; i++)
-  print(shineBrightLikeADiamond(String.fromCharCode(i)))
+// for (let i = a; i <= z; i++)
+//   print(shineBrightLikeADiamond(String.fromCharCode(i)))
+
+print(shineBrightLikeADiamond("d"))
