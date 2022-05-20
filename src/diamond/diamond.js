@@ -1,6 +1,8 @@
+'use strict'
+
 const print = array => array.forEach(line => console.log(line.join('')))
 
-const picture = [
+const example = [
   [' ', ' ', 'a', ' ', ' '],
   [' ', 'b', ' ', 'b', ' '],
   ['c', ' ', ' ', ' ', 'c'],
@@ -8,7 +10,7 @@ const picture = [
   [' ', ' ', 'a', ' ', ' ']
 ]
 
-print(picture)
+print(example)
 
 print(doSomeStuff("c"))
 
@@ -32,7 +34,14 @@ function doSomeStuff(letter) {
     const line = []
 
     for (let j = 0; j < size; j++) {
-      line.push(rowLetter)
+      const a = (i + j) === letterIndex
+      const b = (size - 1 - i + j) === letterIndex
+      const c = (size - 1 - j + i) === letterIndex
+      const d = size - (size - j - size - i) === letterIndex
+
+      const letterOrDot = (a || b || c || d) ? rowLetter : "."
+
+      line.push(letterOrDot)
     }
 
     lines.push(line)
