@@ -1,10 +1,11 @@
-'use strict'
-
-const print = array => array.forEach(line => console.log(line.join('')))
+const a = "a".charCodeAt(0) // 97
+const A = "A".charCodeAt(0) // 65
 
 const shineBrightLikeADiamond = (letter) => {
-  const begin = "a".charCodeAt(0)
+  validateInput(letter)
+
   const end = letter.charCodeAt(0)
+  const begin = end < a ? A : a
   const abc = []
 
   for (let i = begin; i <= end; i++)
@@ -29,13 +30,17 @@ const shineBrightLikeADiamond = (letter) => {
     lines.push(line)
   }
 
-  return lines
+  print(lines)
 }
 
-const a = 97
-const z = 122
+const validateInput = (letter) => {
+  if (letter === undefined)
+    throw new Error("Letter ist undefined!")
 
-// for (let i = a; i <= z; i++)
-//   print(shineBrightLikeADiamond(String.fromCharCode(i)))
+  if (!letter.match("^[a-zA-Z]$"))
+    throw new Error(`Just one letter ffs (${letter})!`)
+}
 
-print(shineBrightLikeADiamond("d"))
+const print = array => array.forEach(line => console.log(line.join('')))
+
+export {shineBrightLikeADiamond}
