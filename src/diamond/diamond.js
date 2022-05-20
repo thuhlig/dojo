@@ -1,37 +1,42 @@
-const drawDiamond = (letter) => {
+const print = array => array.forEach(line => console.log(line.join('')))
+
+const picture = [
+  [' ', ' ', 'a', ' ', ' '],
+  [' ', 'b', ' ', 'b', ' '],
+  ['c', ' ', ' ', ' ', 'c'],
+  [' ', 'b', ' ', 'b', ' '],
+  [' ', ' ', 'a', ' ', ' ']
+]
+
+print(picture)
+
+print(doSomeStuff("c"))
+
+function doSomeStuff(letter) {
   const a = 97
   const z = 122
+  const abc = []
 
-  const chars = []
+  for (let i = a; i <= z; i++)
+    abc.push(String.fromCharCode(i))
 
-  for (let i = a; i <= letter.charCodeAt(0); i++)
-    chars.push(String.fromCharCode(i))
+  const letterIndex = abc.indexOf(letter)
+  const size = letterIndex * 2 + 1
 
-  for (let i = 0; i < chars.length; i++) {
-    console.log(buildLine(chars, i))
+  const lines = []
+
+  for (let i = 0; i < size; i++) {
+    const rowLetterCode = i > letterIndex ? a + size - i - 1 : a + i
+    const rowLetter = String.fromCharCode(rowLetterCode)
+
+    const line = []
+
+    for (let j = 0; j < size; j++) {
+      line.push(rowLetter)
+    }
+
+    lines.push(line)
   }
+
+  return lines
 }
-
-const buildLine = (chars, i) => {
-  let line = ``
-
-  for (let j = 0; j < chars.length - i - 1; j++)
-    line = `${line}.`
-
-  line = `${line}${chars[i]}`
-
-  return line
-}
-
-drawDiamond('c')
-
-// letter ascii - a ascii + letter +  letter ascii - ascii
-// 99           - 97      + a         99 -         - 97
-//
-// // ..a..
-// // .b.b.
-// // c...c
-// // .b.b.
-// // ..a..
-//
-// zweidimensionales array (pos und pos *-1)
