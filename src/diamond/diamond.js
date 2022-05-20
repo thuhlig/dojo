@@ -1,23 +1,16 @@
-const a = "a".charCodeAt(0) // 97
-const A = "A".charCodeAt(0) // 65
-
 const shineBrightLikeADiamond = (letter) => {
   validateInput(letter)
 
   const end = letter.charCodeAt(0)
+  const a = "a".charCodeAt(0) // 97
+  const A = "A".charCodeAt(0) // 65
   const begin = end < a ? A : a
-  const abc = []
-
-  for (let i = begin; i <= end; i++)
-    abc.push(String.fromCharCode(i))
-
-  const letterIndex = abc.indexOf(letter)
-  const size = abc.length * 2 - 1
-
+  const letterIndex = end - begin
+  const size = ((letterIndex + 1) * 2) - 1
   const lines = []
 
   for (let i = 0; i < size; i++) {
-    const rowLetter = i > letterIndex ? abc[size - i - 1] : abc[i]
+    const rowLetter = String.fromCharCode(i > letterIndex ? (begin + size - i - 1) : (begin + i))
     const line = []
 
     for (let j = 0; j < size; j++) {
